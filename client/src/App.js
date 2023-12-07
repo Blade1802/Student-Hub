@@ -1,24 +1,43 @@
-import "./App.css";
+import {
+  BrowserRouter,
+  Navigate,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+import Dashboard from "./pages/dashboard";
+import Home from "./pages/home";
+import Login from "./pages/login";
+import { useSelector } from "react-redux";
 
-function App() {
+const PrivateRoutes = () => {
+  const { isAuth } = useSelector((state) => state.auth);
+
+  return <>{isAuth ? <Outlet /> : <Navigate to="/login" />}</>;
+};
+
+const RestrictedRoutes = () => {
+  const { isAuth } = useSelector((state) => state.auth);
+
+  return <>{!isAuth ? <Outlet /> : <Navigate to="/dashboard" />}</>;
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route element={<PrivateRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+
+        <Route element={<RestrictedRoutes />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
