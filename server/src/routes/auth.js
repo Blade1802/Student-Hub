@@ -9,6 +9,13 @@ const router = Router();
 
 router.get("/get-users", getUsers);
 router.post("/login", loginValidation, validationMiddleware, login);
+router.get("/authCheck", userAuth, async (req, res) => {
+  try {
+    return res.status(200).send("Authorized");
+  } catch (err) {
+    console.error(err);
+  }
+});
 router.get("/protected", userAuth, protected);
 router.get("/logout", logout);
 

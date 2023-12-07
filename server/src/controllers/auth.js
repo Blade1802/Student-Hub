@@ -5,6 +5,9 @@ const { ACCESS_TOKEN_SECRET } = require("../constants");
 exports.getUsers = async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM users");
+    return res.status(200).json({
+      results,
+    });
   } catch (err) {
     console.error(err);
   }

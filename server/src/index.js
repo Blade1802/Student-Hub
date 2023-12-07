@@ -12,30 +12,13 @@ require("./middlewares/passport-middleware");
 const app = express();
 
 // middlewares
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 
 // routes
 app.use("/api", authRoutes);
-
-app.get("/", async (req, res) => {
-  try {
-    const results = await db.query("SELECT * FROM users where user_id = 3");
-    const user = results.rows[0];
-    console.log(user);
-    res.status(200).json({
-      status: "success",
-      results: results.rowCount,
-      data: {
-        users: results.rows,
-      },
-    });
-  } catch (err) {
-    console.error(err);
-  }
-});
 
 const port = process.env.PORT || 4000;
 

@@ -7,6 +7,6 @@ CREATE TABLE users(
     user_type VARCHAR(10) NOT NULL check(user_type IN ('admin', 'student'))
 );
 INSERT INTO users (user_email, user_password, user_type)
-VALUES ('aayush', 'aayush123', 'admin');
+VALUES ('aayush@gmail.com', 'aayush123', 'admin');
 INSERT INTO users (user_email, user_password, user_type)
-VALUES ('test', 'test123', 'student');
+VALUES ('test@gmail.com', 'test123', 'student');
