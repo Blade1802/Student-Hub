@@ -11,7 +11,9 @@ router.get("/get-users", getUsers);
 router.post("/login", loginValidation, validationMiddleware, login);
 router.get("/authCheck", userAuth, async (req, res) => {
   try {
-    return res.status(200).send("Authorized");
+    return res.status(200).json({
+      user: req.user,
+    });
   } catch (err) {
     console.error(err);
   }

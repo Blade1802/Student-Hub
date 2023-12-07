@@ -1,8 +1,23 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { onLogout } from "../api/auth";
+import { useDispatch } from "react-redux";
+import { unauthenticateUser } from "../redux/slices/authSlice";
 
 const Navbar = () => {
   const { isAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const logout = async () => {
+    try {
+      await onLogout();
+
+      dispatch(unauthenticateUser());
+      localStorage.removeItem("isAuth");
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <nav className="navbar navbar-light bg-light">
@@ -18,6 +33,9 @@ const Navbar = () => {
             <NavLink to="/dashboard" className="mx-3">
               <span>Dashboard</span>
             </NavLink>
+            <button onClick={() => logout()} className="btn btn-primary">
+              Logout
+            </button>
           </div>
         ) : (
           <div>

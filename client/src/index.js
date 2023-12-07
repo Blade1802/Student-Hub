@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import App from "./App";
 import "./index.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

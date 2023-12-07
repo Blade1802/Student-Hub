@@ -33,8 +33,11 @@ const Login = () => {
 
   return (
     <Layout>
-      <form onSubmit={(e) => onSubmit(e)} className="container mb-3 mt-3">
-        <h1 className="text-center mb-3">Login</h1>
+      <form
+        onSubmit={(e) => onSubmit(e)}
+        className="bg-white border rounded-4 mx-auto p-4 w-50 mb-3 mt-5"
+      >
+        <h1 className="text-center mb-5">Login</h1>
 
         <div className="form-floating mb-3">
           <input

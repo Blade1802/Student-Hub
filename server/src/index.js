@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const db = require("./db");
 const authRoutes = require("./routes/auth");
+const taskRoutes = require("./routes/tasks");
 
 // Passport middleware
 require("./middlewares/passport-middleware");
@@ -19,6 +20,7 @@ app.use(passport.initialize());
 
 // routes
 app.use("/api", authRoutes);
+app.use("/api", taskRoutes);
 
 const port = process.env.PORT || 4000;
 
