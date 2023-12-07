@@ -6,7 +6,6 @@ const TaskModel = () => {
     title: "",
     url: "",
   });
-  const [response, setResponse] = useState();
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -16,14 +15,11 @@ const TaskModel = () => {
     e.preventDefault();
 
     try {
-      setResponse(await createTasks(values));
+      await createTasks(values);
     } catch (error) {
       console.log(error.response.data.errors[0].msg);
-      setResponse(error);
     }
   };
-
-  useEffect(() => {});
 
   return (
     <div>

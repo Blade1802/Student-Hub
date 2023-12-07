@@ -21,7 +21,10 @@ const InboxItem = ({ user_id }) => {
     <div className="bg-white border rounded-4">
       {tasks.map((task) => {
         return (
-          <div key={task.task_id} className="d-flex flex-row position-relative">
+          <div
+            key={task.task_id}
+            className="d-flex flex-row position-relative border"
+          >
             <div className="p-4">
               <i className="bi bi-inbox" style={{ fontSize: 30 }}></i>
             </div>
