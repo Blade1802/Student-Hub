@@ -4,16 +4,16 @@ import { fetchTasks } from "../api/tasks";
 const InboxItem = ({ user_id }) => {
   const [tasks, setTasks] = useState([]);
 
-  const fetchTasksList = async () => {
-    try {
-      const response = await fetchTasks(user_id);
-      setTasks(response.data.tasks);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchTasksList = async () => {
+      try {
+        const response = await fetchTasks(user_id);
+        setTasks(response.data.tasks);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchTasksList();
   }, []);
 
@@ -21,7 +21,7 @@ const InboxItem = ({ user_id }) => {
     <div className="bg-white border rounded-4">
       {tasks.map((task) => {
         return (
-          <div className="d-flex flex-row position-relative">
+          <div key={task.task_id} className="d-flex flex-row position-relative">
             <div className="p-4">
               <i className="bi bi-inbox" style={{ fontSize: 30 }}></i>
             </div>

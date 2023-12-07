@@ -4,6 +4,7 @@ import { authCheck, onLogout } from "../api/auth";
 import Layout from "../components/layout";
 import { unauthenticateUser } from "../redux/slices/authSlice";
 import InboxItem from "../components/inboxItem";
+import TaskModel from "../components/taskModel";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <TaskModel />
       </Layout>
     </div>
   );
