@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="navbar navbar-light bg-light">
       <div className="container">
         <div>
-          <NavLink to="/">
+          <NavLink to="/home">
             <span className="navbar-brand mb-0 h1">Home</span>
           </NavLink>
         </div>
@@ -41,10 +41,6 @@ const Navbar = () => {
           <div>
             <NavLink to="/login">
               <span>Login</span>
-            </NavLink>
-
-            <NavLink to="/register" className="mx-3">
-              <span>Register</span>
             </NavLink>
           </div>
         )}

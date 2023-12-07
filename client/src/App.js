@@ -30,6 +30,7 @@ const App = () => {
 
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/home" element={<Home />} />
         </Route>
 
         <Route element={<RestrictedRoutes />}>
