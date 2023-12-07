@@ -51,7 +51,7 @@ const Dashboard = () => {
   ) : (
     <div>
       <Layout>
-        <h1 className="text-center">
+        <h1 className="text-center mt-3">
           {user.user_type === "admin" ? "Admin " : "Student "}Dashboard
         </h1>
         <div className="row mt-5">
