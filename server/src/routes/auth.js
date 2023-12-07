@@ -8,8 +8,8 @@ const { userAuth } = require("../middlewares/auth-middleware");
 const router = Router();
 
 router.get("/get-users", getUsers);
-router.get("/login", loginValidation, validationMiddleware, login);
+router.post("/login", loginValidation, validationMiddleware, login);
 router.get("/protected", userAuth, protected);
-router.get("/logout", userAuth, logout);
+router.get("/logout", logout);
 
 module.exports = router;
