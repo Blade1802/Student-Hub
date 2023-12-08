@@ -7,6 +7,7 @@ const {
 const { userAuth } = require("../middlewares/auth-middleware");
 const router = Router();
 
+// Routes related to authorisation
 router.get("/get-users", getUsers);
 router.post("/login", loginValidation, validationMiddleware, login);
 router.get("/authCheck", userAuth, async (req, res) => {

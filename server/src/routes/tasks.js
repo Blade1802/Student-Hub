@@ -7,6 +7,7 @@ const {
 } = require("../middlewares/validations-middleware");
 const router = Router();
 
+// Routes related to tasks
 router.get("/get-tasks/:id", getTasks);
 router.post(
   "/create-tasks",

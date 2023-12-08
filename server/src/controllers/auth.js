@@ -1,7 +1,9 @@
+// Authorisation controller
 const db = require("../db");
 const { sign } = require("jsonwebtoken");
 const { ACCESS_TOKEN_SECRET } = require("../constants");
 
+// Get all users
 exports.getUsers = async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM users");
@@ -13,6 +15,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+// Return signed jwt token as a cookie
 exports.login = async (req, res) => {
   let user = req.user;
 
@@ -37,6 +40,7 @@ exports.login = async (req, res) => {
   }
 };
 
+// Access protected information
 exports.protected = async (req, res) => {
   try {
     return res.status(200).json({
@@ -47,6 +51,7 @@ exports.protected = async (req, res) => {
   }
 };
 
+// Logout user by clearing token cookie
 exports.logout = async (req, res) => {
   try {
     return res.status(200).clearCookie("token", { httpOnly: true }).json({

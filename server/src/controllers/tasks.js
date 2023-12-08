@@ -1,5 +1,7 @@
+// Tasks controller
 const db = require("../db");
 
+// Get all tasks specific to a user
 exports.getTasks = async (req, res) => {
   try {
     const tasks = await db.query("SELECT * FROM tasks WHERE user_id = $1", [
@@ -16,6 +18,7 @@ exports.getTasks = async (req, res) => {
   }
 };
 
+// Create bulk student tasks
 exports.createTasks = async (req, res) => {
   try {
     if (req.user.user_type === "admin") {

@@ -1,3 +1,4 @@
+// Module to export environment variables
 require("dotenv").config();
 
 module.exports = {
