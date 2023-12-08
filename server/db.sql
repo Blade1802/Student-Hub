@@ -19,22 +19,22 @@ CREATE TABLE tasks(
 -- Dummy Data - Users
 INSERT INTO users (user_email, user_password, user_name, user_type)
 VALUES (
-        'aayush@gmail.com',
-        'aayush123',
-        'Aayush Gaur',
+        'admin@mytudublin.ie',
+        'admin123',
+        'Admin Persona',
         'admin'
     );
 INSERT INTO users (user_email, user_password, user_name, user_type)
 VALUES (
-        'test@gmail.com',
-        'test123',
+        'student@mytudublin.ie',
+        'student123',
         'Test Student',
         'student'
     );
 INSERT INTO users (user_email, user_password, user_name, user_type)
 VALUES (
-        'test2@gmail.com',
-        'test123',
+        'student2@mytudublin.ie',
+        'student123',
         'Test Student 2',
         'student'
     );
