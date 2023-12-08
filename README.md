@@ -6,7 +6,7 @@ Final year project
 
 - Rename the `server/.env.example` file in the server directory to `.env`
 - Edit the environment variables according to your Postgres credentials
-- Create a database in postgres using psql or similar, ensure the same databse is used in your .env file.
+- Create a database in postgres using psql or anything similar, ensure the same database is used in your `.env` file.
 - Setup the database (includes dummy data) using SQL in `server/db.sql`. Omit `CREATE DATABASE` on `line 1` if you are changing the database name.
 
 ## Running the project
