@@ -38,12 +38,12 @@ Name: `Admin Persona`
 
 #### Student 1:
 
-Email: `student@mytudublin.ie`
-Password: `student123`
+Email: `student@mytudublin.ie`\
+Password: `student123`\
 Name: `Test Student`
 
 #### Student 2:
 
-Email: `student2@mytudublin.ie`
-Password: `student123`
+Email: `student2@mytudublin.ie`\
+Password: `student123`\
 Name: `Test Student 2`
