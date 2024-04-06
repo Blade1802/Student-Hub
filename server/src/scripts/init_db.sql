@@ -1,13 +1,13 @@
 CREATE DATABASE student_hub_v1;
--- Users Table
+-- Create Users Table
 CREATE TABLE users(
   user_id SERIAL PRIMARY KEY,
   user_email VARCHAR(255) UNIQUE NOT NULL,
   user_password VARCHAR(255) NOT NULL,
   user_name VARCHAR(255) NOT NULL,
-  user_type VARCHAR(10) NOT NULL check(user_type IN ('admin', 'student'))
+  user_type VARCHAR(10) NOT NULL CHECK (user_type IN ('admin', 'student'))
 );
--- Tasks table
+-- Create Tasks Table
 CREATE TABLE tasks(
   task_id SERIAL PRIMARY KEY,
   task_title VARCHAR(255) NOT NULL,
@@ -16,21 +16,27 @@ CREATE TABLE tasks(
   user_id INTEGER,
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
--- Dummy Data - Users
+-- Insert Dummy Data for Users
 INSERT INTO users (user_email, user_password, user_name, user_type)
 VALUES (
     'admin@mytudublin.ie',
     'admin123',
     'Admin Persona',
     'admin'
-  );
-INSERT INTO users (user_email, user_password, user_name, user_type)
-VALUES (
+  ),
+  (
     'student@mytudublin.ie',
     'student123',
     'Test Student',
     'student'
+  ),
+  (
+    'student2@mytudublin.ie',
+    'student123',
+    'Test Student 2',
+    'student'
   );
+-- Insert Dummy Data for Tasks
 INSERT INTO tasks (task_title, task_url, user_id)
 VALUES (
     'Complete Action Item: Event Registration',
