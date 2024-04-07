@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authCheck, onLogout } from "../api/auth";
-import Layout from "../components/layout";
 import { unauthenticateUser } from "../redux/slices/authSlice";
+import Layout from "../components/layout";
+import Header from "../components/header";
+import Footer from "../components/footer";
 import InboxItem from "../components/inboxItem";
 import TaskModel from "../components/taskModel";
+import Navbar from "../components/navbar";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -51,10 +54,12 @@ const Dashboard = () => {
     </Layout>
   ) : (
     <div>
-      <Layout>
-        <h1 className="text-center mt-3">
+      <Navbar />
+      <Header />
+      <div className="container">
+        {/* <h1 className="text-center mt-3">
           {user.user_type === "admin" ? "Admin " : "Student "}Dashboard
-        </h1>
+        </h1> */}
         <div className="row mt-5">
           <div className="col-4">
             <h2>
@@ -71,7 +76,8 @@ const Dashboard = () => {
           </div>
         </div>
         <TaskModel />
-      </Layout>
+      </div>
+      <Footer />
     </div>
   );
 };

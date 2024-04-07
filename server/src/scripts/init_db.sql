@@ -12,7 +12,8 @@ CREATE TABLE tasks(
   task_id SERIAL PRIMARY KEY,
   task_title VARCHAR(255) NOT NULL,
   task_url VARCHAR(255) NOT NULL,
-  task_createdAt DATE DEFAULT current_date,
+  task_createdAt DATE DEFAULT CURRENT_DATE,
+  task_deadline DATE DEFAULT (CURRENT_DATE + INTERVAL '7 days'),
   user_id INTEGER,
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

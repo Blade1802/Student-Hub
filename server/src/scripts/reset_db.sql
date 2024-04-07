@@ -14,7 +14,8 @@ CREATE TABLE tasks(
   task_id SERIAL PRIMARY KEY,
   task_title VARCHAR(255) NOT NULL,
   task_url VARCHAR(255) NOT NULL,
-  task_createdAt DATE DEFAULT current_date,
+  task_createdAt DATE DEFAULT CURRENT_DATE,
+  task_deadline DATE DEFAULT (CURRENT_DATE + INTERVAL '7 days'),
   user_id INTEGER,
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
@@ -41,6 +42,21 @@ VALUES (
 -- Insert Dummy Data for Tasks
 INSERT INTO tasks (task_title, task_url, user_id)
 VALUES (
+    'Complete Action Item: Event Registration',
+    'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    1
+  ),
+  (
+    'Complete Action Item: Event Registration',
+    'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    2
+  ),
+  (
+    'Complete Action Item: Event Registration',
+    'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    3
+  ),
+  (
     'Complete Action Item: Event Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
     1
