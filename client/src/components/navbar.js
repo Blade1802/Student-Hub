@@ -19,6 +19,16 @@ const Navbar = () => {
     }
   };
 
+  const handleSearchKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const query = event.target.value;
+      if (query.trim()) {
+        navigate(`/search?query=${encodeURIComponent(query)}`);
+      }
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -50,6 +60,7 @@ const Navbar = () => {
                   placeholder="Search"
                   aria-label="Search"
                   aria-describedby="basic-addon1"
+                  onKeyDown={handleSearchKeyPress}
                 />
               </div>
             </div>

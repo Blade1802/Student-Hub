@@ -8,6 +8,7 @@ import {
 import Dashboard from "./pages/dashboard";
 import Home from "./pages/home";
 import Login from "./pages/login";
+import SearchResults from "./pages/searchResults";
 import { useSelector } from "react-redux";
 
 const PrivateRoutes = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<SearchResults />} />
         </Route>
 
         <Route element={<RestrictedRoutes />}>
