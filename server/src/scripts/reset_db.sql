@@ -40,49 +40,94 @@ VALUES (
     'student'
   );
 -- Insert Dummy Data for Tasks
-INSERT INTO tasks (task_title, task_url, user_id)
+INSERT INTO tasks (
+    task_title,
+    task_url,
+    task_createdAt,
+    task_deadline,
+    user_id
+  )
 VALUES (
     'Complete Action Item: Event Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    '2024-01-01',
+    '2024-04-12',
     1
   ),
   (
     'Complete Action Item: Event Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    '2024-01-01',
+    '2024-04-12',
     2
   ),
   (
     'Complete Action Item: Event Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    '2024-01-01',
+    '2024-04-12',
     3
   ),
   (
-    'Complete Action Item: Event Registration',
+    'Complete Action Item: Career Fair Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    '2024-02-01',
+    '2024-04-21',
     1
   ),
   (
-    'Complete Action Item: Event Registration',
+    'Complete Action Item: Career Fair Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    '2024-02-01',
+    '2024-04-21',
     2
   ),
   (
-    'Complete Action Item: Event Registration',
+    'Complete Action Item: Career Fair Registration',
     'https://forms.gle/MMmWxPeyHZKhN3Ej6',
+    '2024-02-01',
+    '2024-04-21',
     3
   ),
   (
     'Complete Action Item: T-Shirt Sign Up',
     'https://forms.gle/EoMfwxeqmfrQ2p59A',
+    '2024-04-01',
+    '2024-05-21',
     1
   ),
   (
     'Complete Action Item: T-Shirt Sign Up',
     'https://forms.gle/EoMfwxeqmfrQ2p59A',
+    '2024-04-01',
+    '2024-05-21',
     2
   ),
   (
     'Complete Action Item: T-Shirt Sign Up',
     'https://forms.gle/EoMfwxeqmfrQ2p59A',
+    '2024-04-01',
+    '2024-05-21',
+    3
+  ),
+  (
+    'Register for FYP Demo',
+    'https://forms.gle/VMdtmeLAxH6QMFP77',
+    '2024-04-01',
+    '2024-04-10',
+    1
+  ),
+  (
+    'Register for FYP Demo',
+    'https://forms.gle/VMdtmeLAxH6QMFP77',
+    '2024-04-01',
+    '2024-04-10',
+    2
+  ),
+  (
+    'Register for FYP Demo',
+    'https://forms.gle/VMdtmeLAxH6QMFP77',
+    '2024-04-01',
+    '2024-04-10',
     3
   );

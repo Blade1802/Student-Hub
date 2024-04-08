@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchTasks } from "../api/tasks";
-import { formatDistance } from "date-fns";
+import { add, formatDistance } from "date-fns";
 import "./inboxItem.css";
 
 const InboxItem = ({ user_id }) => {
@@ -10,7 +10,10 @@ const InboxItem = ({ user_id }) => {
     const fetchTasksList = async () => {
       try {
         const response = await fetchTasks(user_id);
-        setTasks(response.data.tasks);
+        const sortedTasks = response.data.tasks.sort(
+          (a, b) => new Date(a.task_deadline) - new Date(b.task_deadline)
+        );
+        setTasks(sortedTasks.slice(0, 3)); // Keep only the first 3 tasks
       } catch (error) {
         console.log(error);
       }
@@ -19,11 +22,9 @@ const InboxItem = ({ user_id }) => {
     fetchTasksList();
   }, [user_id]);
 
-  const isDueWithinAWeek = (deadline) => {
-    const today = new Date();
-    const oneWeekLater = new Date();
-    oneWeekLater.setDate(today.getDate() + 7); // Set to 7 days after today
+  const oneWeekLater = add(new Date(), { days: 7 });
 
+  const isDueWithinAWeek = (deadline) => {
     return new Date(deadline) <= oneWeekLater;
   };
 
@@ -53,7 +54,12 @@ const InboxItem = ({ user_id }) => {
                   className="mx-2 px-1 bg-danger-subtle text-danger fw-bold width-0"
                   style={{ maxWidth: "max-content" }}
                 >
-                  DUE {new Date(task.task_deadline).toLocaleDateString()}
+                  DUE{" "}
+                  {new Date(task.task_deadline).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
                 </span>
               )}
             </div>
