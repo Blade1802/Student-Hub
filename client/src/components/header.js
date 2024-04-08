@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <div className="header-image">
-      <img src="/header.jpg" class="img-fluid" alt="header" />
+      <img src="/header.jpg" className="img-fluid" alt="header" />
     </div>
   );
 };

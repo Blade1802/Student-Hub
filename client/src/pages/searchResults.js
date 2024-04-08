@@ -7,24 +7,34 @@ import Sidebar from "../components/searchSidebar";
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
-  const [students, setStudents] = useState([]);
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("student"); // new state for selected category
 
-  // Extracted data fetching logic
-  const fetchStudents = async (query) => {
+  // Updated data fetching logic
+  const fetchResults = async (query, category) => {
     setLoading(true);
     setError(null);
     try {
-      // Simulate fetching students based on the query
       // Replace this with actual fetch call to API
-      const fetchedStudents = await new Promise((resolve, reject) =>
-        setTimeout(() => resolve([{ name: "John Doe", id: 1 }]), 1000)
+      // The API call would depend on both the query and the category
+      const fetchedResults = await new Promise((resolve, reject) =>
+        setTimeout(
+          () =>
+            resolve({
+              student: [{ name: "John Doe", id: 1 }],
+              people: [{ name: "Johnny Doe", id: 1 }],
+              tasks: [],
+              articles: [],
+            }),
+          10
+        )
       );
-      setStudents(fetchedStudents.length > 0 ? fetchedStudents : []);
+      setResults(fetchedResults[category] ?? []);
     } catch (err) {
-      setError("Failed to fetch students. Please try again later.");
-      setStudents([]);
+      setError("Failed to fetch results. Please try again later.");
+      setResults([]);
     } finally {
       setLoading(false);
     }
@@ -32,11 +42,11 @@ const SearchResultsPage = () => {
 
   useEffect(() => {
     if (query) {
-      fetchStudents(query);
+      fetchResults(query, selectedCategory);
     } else {
-      setStudents([]);
+      setResults([]);
     }
-  }, [query]);
+  }, [query, selectedCategory]);
 
   return (
     <>
@@ -46,23 +56,29 @@ const SearchResultsPage = () => {
           <h1>Loading...</h1>
         ) : error ? (
           <div>Error: {error}</div>
-        ) : students.length > 0 ? (
+        ) : results.length > 0 ? (
           <div className="d-flex" id="wrapper">
             <Sidebar
               studentCount={2}
               peopleCount={0}
               tasksCount={1}
               articlesCount={0}
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory} // Pass the function to the Sidebar
             />
-            <h2>Search Results for "{query}"</h2>
-            <ul>
-              {students.map((student) => (
-                <li key={student.id}>{student.name}</li>
-              ))}
-            </ul>
+            <div>
+              <h2>
+                Search Results for "{query}" in "{selectedCategory}"
+              </h2>
+              <ul>
+                {results.map((item) => (
+                  <li key={item.id}>{item.name}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         ) : (
-          <div>No students found for query: {query || "Empty query"}</div>
+          <div>No results found for query: {query || "Empty query"}</div>
         )}
       </div>
       <Footer />

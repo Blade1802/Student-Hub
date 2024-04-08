@@ -1,79 +1,93 @@
 import React from "react";
 
 const SidebarBadge = ({ count }) => {
-  if (count > 0) {
-    return (
-      <span className="badge bg-primary rounded-pill ms-auto">{count}</span>
-    );
-  } else {
-    return <span className="text-primary ms-auto pe-2">0</span>;
-  }
+  return count > 0 ? (
+    <span className="badge bg-primary rounded-pill ms-auto">{count}</span>
+  ) : (
+    <span className="text-primary ms-auto pe-2">0</span>
+  );
 };
 
-const Sidebar = ({ studentCount, peopleCount, tasksCount, articlesCount }) => {
+const Sidebar = ({
+  studentCount,
+  peopleCount,
+  tasksCount,
+  articlesCount,
+  selectedCategory,
+  onCategoryChange,
+}) => {
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 bg-light"
       style={{ width: "280px", height: "100vh" }}
     >
-      <a
-        href="/"
-        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
+      <button
+        onClick={() => onCategoryChange("all")}
+        className={`d-flex align-items-center  mb-md-0 btn text-decoration-none ${
+          selectedCategory === "all" ? "" : "link-dark"
+        }`}
       >
-        <span className="fs-4 ms-2">
-          <i class="bi bi-bookmark me-2"></i>Search Results
+        <span className="fs-4">
+          <i className="bi bi-bookmark me-2"></i>Search Results
         </span>
-      </a>
+      </button>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a
-            href="#student"
-            className="nav-link link-dark d-flex justify-content-between"
-            aria-current="page"
+          <button
+            onClick={() => onCategoryChange("student")}
+            className={`nav-link d-flex justify-content-between align-items-center btn w-100 ${
+              selectedCategory === "student" ? "" : "link-dark"
+            }`}
           >
             <span>
               <i className="bi bi-person-circle me-2"></i>
               Student
             </span>
             <SidebarBadge count={studentCount} />
-          </a>
+          </button>
         </li>
         <li>
-          <a
-            href="#people"
-            className="nav-link link-dark d-flex justify-content-between"
+          <button
+            onClick={() => onCategoryChange("people")}
+            className={`nav-link d-flex justify-content-between align-items-center btn w-100 ${
+              selectedCategory === "people" ? "" : "link-dark"
+            }`}
           >
             <span>
               <i className="bi bi-people-fill me-2"></i>
               People
             </span>
             <SidebarBadge count={peopleCount} />
-          </a>
+          </button>
         </li>
         <li>
-          <a
-            href="#tasks-reports"
-            className="nav-link link-dark d-flex justify-content-between"
+          <button
+            onClick={() => onCategoryChange("tasks")}
+            className={`nav-link d-flex justify-content-between align-items-center btn w-100 ${
+              selectedCategory === "tasks" ? "" : "link-dark"
+            }`}
           >
             <span>
               <i className="bi bi-table me-2"></i>
               Tasks and Reports
             </span>
             <SidebarBadge count={tasksCount} />
-          </a>
+          </button>
         </li>
         <li>
-          <a
-            href="#articles"
-            className="nav-link link-dark d-flex justify-content-between"
+          <button
+            onClick={() => onCategoryChange("articles")}
+            className={`nav-link d-flex justify-content-between align-items-center btn w-100 ${
+              selectedCategory === "articles" ? "" : "link-dark"
+            }`}
           >
             <span>
               <i className="bi bi-journal-text me-2"></i>
               Articles
             </span>
             <SidebarBadge count={articlesCount} />
-          </a>
+          </button>
         </li>
       </ul>
     </div>
