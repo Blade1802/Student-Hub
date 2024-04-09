@@ -8,7 +8,7 @@ const {
 const router = Router();
 
 // Routes related to tasks
-router.get("/get-tasks/:id", getTasks);
+router.get("/get-tasks/:id", userAuth, getTasks);
 router.post(
   "/create-tasks",
   createTaskValidation,
