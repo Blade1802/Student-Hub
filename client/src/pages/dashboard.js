@@ -41,7 +41,7 @@ const Dashboard = () => {
   const today = new Date();
   const todayDate =
     today.toLocaleDateString("default", { weekday: "long" }) +
-    " " +
+    ", " +
     today.toLocaleString("default", { month: "long" }) +
     " " +
     today.getDate() +
@@ -62,14 +62,14 @@ const Dashboard = () => {
         </h1> */}
         <div className="row mt-5">
           <div className="col-4">
-            <h2>
+            <dt className="fs-2">
               {today.getHours() < 12 ? "Good Morning" : "Good Afternoon"},{" "}
               {user.user_name}
-            </h2>
-            <h5 className="text-secondary mt-5">It's {todayDate}</h5>
+            </dt>
+            <dt className="text-secondary mt-5 fs-5">It's {todayDate}</dt>
           </div>
           <div className="col">
-            <h4>Inbox</h4>
+            <dt className="fs-4">Inbox</dt>
             <div className="mt-5">
               <InboxItem user_id={user.user_id} />
             </div>

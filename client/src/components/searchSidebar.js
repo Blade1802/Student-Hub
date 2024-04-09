@@ -18,13 +18,13 @@ const Sidebar = ({
 }) => {
   return (
     <div
-      className="d-flex flex-column flex-shrink-0 p-3 bg-light"
+      className="d-flex flex-column flex-shrink-0 p-3 bg-light border-end"
       style={{ width: "280px", height: "100vh" }}
     >
       <button
         onClick={() => onCategoryChange("all")}
         className={`d-flex align-items-center  mb-md-0 btn text-decoration-none ${
-          selectedCategory === "all" ? "" : "link-dark"
+          selectedCategory === "all" ? "link-primary" : "link-dark"
         }`}
       >
         <span className="fs-4">
@@ -32,7 +32,7 @@ const Sidebar = ({
         </span>
       </button>
       <hr />
-      <ul className="nav nav-pills flex-column mb-auto">
+      <ul className="nav nav-pills flex-column mb-auto border-bottom pb-3">
         <li className="nav-item">
           <button
             onClick={() => onCategoryChange("student")}

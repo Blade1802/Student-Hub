@@ -24,8 +24,8 @@ connectDB();
 
 // routes
 app.use("/api", authRoutes);
-app.use("/api", taskRoutes);
-app.use("/api", studentRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/students", studentRoutes);
 
 const port = process.env.PORT || 4000;
 

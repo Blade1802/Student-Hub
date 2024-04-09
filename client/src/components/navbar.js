@@ -30,7 +30,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      className="navbar navbar-expand-lg navbar-light bg-light"
+      style={{
+        boxShadow:
+          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06)",
+      }}
+    >
       <div className="container-fluid">
         <NavLink className="navbar-brand px-1" to="/">
           <i className="bi bi-mortarboard-fill fs-4"></i>
@@ -71,12 +77,12 @@ const Navbar = () => {
             {isAuth ? (
               <>
                 <li className="nav-item px-1">
-                  <NavLink className="nav-link" to="#">
+                  <NavLink className="nav-link" to="/">
                     <i className="bi bi-bell fs-5"></i>
                   </NavLink>
                 </li>
                 <li className="nav-item px-1">
-                  <NavLink className="nav-link" to="#">
+                  <NavLink className="nav-link" to="/">
                     <i className="bi bi-inbox fs-5"></i>
                   </NavLink>
                 </li>
