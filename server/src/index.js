@@ -7,6 +7,7 @@ const db = require("./db");
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
 const studentRoutes = require("./routes/students");
+const searchRoutes = require("./routes/search");
 const { connectDB } = require("./db");
 
 // Passport middleware
@@ -26,6 +27,7 @@ connectDB();
 app.use("/api", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/students", studentRoutes);
+app.use("/api/search", searchRoutes);
 
 const port = process.env.PORT || 4000;
 

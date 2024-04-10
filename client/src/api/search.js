@@ -9,10 +9,9 @@ export const fetchSearchResults = async (query) => {
   };
 
   // Make the HTTP GET request using Axios
-  const response = await axios.get(
-    "http://localhost:4000/api/students/search",
-    { params }
-  );
+  const response = await axios.get("http://localhost:4000/api/search", {
+    params,
+  });
 
   return response.data;
 };

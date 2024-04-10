@@ -1,18 +1,7 @@
+const db = require("../db");
 const Student = require("../models/student");
 
-// Retrieve all students
-const getAllStudents = async (req, res) => {
-  try {
-    const students = await Student.find({});
-    res.status(200).json(students); // Send the retrieved students as a JSON response
-  } catch (error) {
-    console.error("Error retrieving student data:", error);
-    res.status(500).send("Error retrieving student data");
-  }
-};
-
-// Retrieve students based on search criteria for names or student IDs or academicUnit or location
-const getStudentsBySearch = async (req, res) => {
+const getSearchData = async (req, res) => {
   try {
     const searchQuery = req.query.query; // The search query from the request
 
@@ -33,16 +22,23 @@ const getStudentsBySearch = async (req, res) => {
 
     // Retrieve filtered students from the database
     const students = await Student.find(searchCriteria);
+
+    // Retrieve filtered adminTasks from the database
+    const tasks = await db.query(
+      "SELECT * FROM adminTasks WHERE title ILIKE $1",
+      [`%${searchQuery}%`]
+    );
+
     res.status(200).json({
       students: students,
+      tasks: tasks.rows,
     }); // Send the retrieved students as a JSON response
   } catch (error) {
-    console.error("Error retrieving student data:", error);
-    res.status(500).send("Error retrieving student data");
+    console.error("Error retrieving query data:", error);
+    res.status(500).send("Error retrieving query data");
   }
 };
 
 module.exports = {
-  getAllStudents,
-  getStudentsBySearch,
+  getSearchData,
 };

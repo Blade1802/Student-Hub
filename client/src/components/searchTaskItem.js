@@ -1,12 +1,12 @@
 import TaskModel from "./taskModel";
 
 const TASK_TYPE_MODAL_MAPPING = {
-  "Create Task": { component: TaskModel, modalId: "createTaskModal" },
+  "create task": { component: TaskModel, modalId: "createTaskModal" },
   // Add other mappings as necessary
 };
 
 const TaskItem = ({ task }) => {
-  const taskInfo = TASK_TYPE_MODAL_MAPPING[task.title];
+  const taskInfo = TASK_TYPE_MODAL_MAPPING[task.title.toLowerCase()];
   const ModalComponent = taskInfo ? taskInfo.component : null;
   const modalId = taskInfo ? taskInfo.modalId : "";
 

@@ -1,5 +1,6 @@
 -- Drop existing tables if they exist to start fresh
-DROP TABLE IF EXISTS tasks,
+DROP TABLE IF EXISTS adminTasks,
+tasks,
 users CASCADE;
 -- Create Users Table
 CREATE TABLE users(
@@ -18,6 +19,11 @@ CREATE TABLE tasks(
   task_deadline DATE DEFAULT (CURRENT_DATE + INTERVAL '7 days'),
   user_id INTEGER,
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+-- Create Admin Tasks Table
+CREATE TABLE adminTasks(
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) UNIQUE NOT NULL
 );
 -- Insert Dummy Data for Users
 INSERT INTO users (user_email, user_password, user_name, user_type)
@@ -131,3 +137,5 @@ VALUES (
     '2024-04-10',
     3
   );
+INSERT INTO adminTasks (title)
+VALUES ('Create Task');
