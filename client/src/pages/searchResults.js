@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { fetchSearchResults } from "../api/search";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Loading from "../components/loading";
 import Sidebar from "../components/searchSidebar";
 import StudentItem from "../components/searchStudentItem";
 
@@ -61,7 +62,7 @@ const SearchResultsPage = () => {
           />
           <div className="container-fluid bg-light p-5">
             {loading ? (
-              <h1>Loading...</h1>
+              <Loading />
             ) : error ? (
               <div>Error: {error}</div>
             ) : results.students?.length ||
@@ -74,8 +75,9 @@ const SearchResultsPage = () => {
                     <dt className="fs-4">Student</dt>
 
                     {results.students.map((student) => (
-                      <StudentItem student={student} />
+                      <StudentItem key={student.id} student={student} />
                     ))}
+                    <hr style={{ width: "65%" }} />
                   </>
                 )}
 

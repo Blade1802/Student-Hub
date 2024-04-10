@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { onLogout } from "../api/auth";
 import { unauthenticateUser } from "../redux/slices/authSlice";
 
@@ -7,6 +8,17 @@ const Navbar = () => {
   const { isAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Update searchQuery state whenever the URL search params change
+  useEffect(() => {
+    const queryParam = searchParams.get("query");
+    if (queryParam) {
+      setSearchQuery(queryParam);
+    }
+  }, [searchParams]);
 
   const logout = async () => {
     try {
@@ -22,9 +34,9 @@ const Navbar = () => {
   const handleSearchKeyPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      const query = event.target.value;
-      if (query.trim()) {
-        navigate(`/search?query=${encodeURIComponent(query)}`);
+      if (searchQuery.trim()) {
+        setSearchParams({ query: searchQuery });
+        navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
       }
     }
   };
@@ -66,6 +78,8 @@ const Navbar = () => {
                   placeholder="Search"
                   aria-label="Search"
                   aria-describedby="basic-addon1"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={handleSearchKeyPress}
                 />
               </div>

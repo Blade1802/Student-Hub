@@ -8,6 +8,7 @@ import Footer from "../components/footer";
 import InboxItem from "../components/inboxItem";
 import TaskModel from "../components/taskModel";
 import Navbar from "../components/navbar";
+import Loading from "../components/loading";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const Dashboard = () => {
 
   return loading ? (
     <Layout>
-      <h1>Loading...</h1>
+      <Loading />
     </Layout>
   ) : (
     <div>
