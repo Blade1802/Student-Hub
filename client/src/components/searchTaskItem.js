@@ -1,13 +1,14 @@
 import TaskModel from "./taskModel";
 
 const TASK_TYPE_MODAL_MAPPING = {
-  "Create Task": TaskModel,
+  "Create Task": { component: TaskModel, modalId: "createTaskModal" },
   // Add other mappings as necessary
 };
 
 const TaskItem = ({ task }) => {
-  // Determine the appropriate modal component based on the task title
-  const ModalComponent = TASK_TYPE_MODAL_MAPPING[task.title] || null;
+  const taskInfo = TASK_TYPE_MODAL_MAPPING[task.title];
+  const ModalComponent = taskInfo ? taskInfo.component : null;
+  const modalId = taskInfo ? taskInfo.modalId : "";
 
   return (
     <>
@@ -18,7 +19,7 @@ const TaskItem = ({ task }) => {
               <a
                 className="text-decoration-none"
                 data-bs-toggle="modal"
-                href="#taskModal"
+                href={`#${modalId}`}
               >
                 <h5 className="text-primary">{task.title}</h5>
               </a>

@@ -47,7 +47,7 @@ const TaskModel = () => {
       {/* Task Model */}
       <div
         className="modal fade"
-        id="taskModal"
+        id="createTaskModal"
         tabIndex="-1"
         aria-labelledby="taskModalLabel"
         aria-hidden="true"
