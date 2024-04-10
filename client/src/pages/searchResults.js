@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchSearchResults } from "../api/search";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
 import Loading from "../components/loading";
 import Sidebar from "../components/searchSidebar";
 import StudentItem from "../components/searchStudentItem";
+import TaskItem from "../components/searchTaskItem";
+import Layout from "../components/layout";
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -21,35 +21,32 @@ const SearchResultsPage = () => {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Updated data fetching logic
-  const fetchResults = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchSearchResults(query);
-
-      setResults(data);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to fetch results. Please try again later.");
-      setResults({
-        students: [],
-        people: [],
-        tasks: [],
-        articles: [],
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchResults = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await fetchSearchResults(query);
+        setResults(data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch results. Please try again later.");
+        setResults({
+          students: [],
+          people: [],
+          tasks: [],
+          articles: [],
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchResults();
   }, [query]);
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <div className="container-fluid p-0">
         <div className="d-flex" id="wrapper">
           <Sidebar
@@ -70,60 +67,75 @@ const SearchResultsPage = () => {
               results.tasks?.length ||
               results.articles?.length ? (
               <>
-                {results.students && results.students.length > 0 && (
-                  <>
-                    <dt className="fs-4">Student</dt>
-
-                    {results.students.map((student) => (
-                      <StudentItem key={student.id} student={student} />
-                    ))}
-                    <hr style={{ width: "65%" }} />
-                  </>
-                )}
-
-                {results.people && results.people.length > 0 && (
-                  <>
-                    <dt className="fs-4">People</dt>
-                    <ul>
-                      {results.people.map((person) => (
-                        <li key={person._id}>{person.name}</li> // Assuming structure is similar
+                {(selectedCategory === "all" ||
+                  selectedCategory === "student") &&
+                  results.students &&
+                  results.students.length > 0 && (
+                    <>
+                      <strong className="fs-4">Student</strong>
+                      {results.students.map((student) => (
+                        <StudentItem key={student.id} student={student} />
                       ))}
-                    </ul>
-                  </>
-                )}
+                    </>
+                  )}
 
-                {results.tasks && results.tasks.length > 0 && (
-                  <>
-                    <dt className="fs-4">Tasks</dt>
-                    <ul>
+                {(selectedCategory === "all" ||
+                  selectedCategory === "people") &&
+                  results.people &&
+                  results.people.length > 0 && (
+                    <>
+                      {selectedCategory === "all" && (
+                        <hr className="my-4" style={{ width: "65%" }} />
+                      )}
+                      <strong className="fs-4">People</strong>
+                      <ul>
+                        {results.people.map((person) => (
+                          <li key={person._id}>{person.name}</li> // Assuming structure is similar
+                        ))}
+                      </ul>
+                    </>
+                  )}
+
+                {(selectedCategory === "all" || selectedCategory === "tasks") &&
+                  results.tasks &&
+                  results.tasks.length > 0 && (
+                    <>
+                      {selectedCategory === "all" && (
+                        <hr className="my-4" style={{ width: "65%" }} />
+                      )}
+                      <strong className="fs-4">Tasks and Reports</strong>
                       {results.tasks.map((task) => (
-                        <li key={task._id}>{task.title}</li> // Adjust according to actual structure
+                        <TaskItem key={task.id} task={task} />
                       ))}
-                    </ul>
-                  </>
-                )}
+                    </>
+                  )}
 
-                {results.articles && results.articles.length > 0 && (
-                  <>
-                    <dt className="fs-4">Articles</dt>
-                    <ul>
-                      {results.articles.map((article) => (
-                        <li key={article._id}>{article.title}</li> // Adjust according to actual structure
-                      ))}
-                    </ul>
-                  </>
-                )}
+                {(selectedCategory === "all" ||
+                  selectedCategory === "articles") &&
+                  results.articles &&
+                  results.articles.length > 0 && (
+                    <>
+                      {selectedCategory === "all" && (
+                        <hr className="my-4" style={{ width: "65%" }} />
+                      )}
+                      <strong className="fs-4">Articles</strong>
+                      <ul>
+                        {results.articles.map((article) => (
+                          <li key={article._id}>{article.title}</li> // Adjust according to actual structure
+                        ))}
+                      </ul>
+                    </>
+                  )}
               </>
             ) : (
-              <dt className="fs-4">
+              <strong className="fs-4">
                 No results found for query: {query || "Empty query"}
-              </dt>
+              </strong>
             )}
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

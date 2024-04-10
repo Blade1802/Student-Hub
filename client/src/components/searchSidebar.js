@@ -19,7 +19,7 @@ const Sidebar = ({
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 bg-light border-end"
-      style={{ width: "280px", height: "100vh" }}
+      style={{ width: "280px" }}
     >
       <button
         onClick={() => onCategoryChange("all")}

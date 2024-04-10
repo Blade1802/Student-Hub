@@ -33,7 +33,10 @@ const getStudentsBySearch = async (req, res) => {
 
     // Retrieve filtered students from the database
     const students = await Student.find(searchCriteria);
-    res.status(200).json({ students: students }); // Send the retrieved students as a JSON response
+    res.status(200).json({
+      students: students,
+      tasks: [{ id: 1, title: "Create Task" }],
+    }); // Send the retrieved students as a JSON response
   } catch (error) {
     console.error("Error retrieving student data:", error);
     res.status(500).send("Error retrieving student data");

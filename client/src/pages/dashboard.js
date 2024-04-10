@@ -4,10 +4,8 @@ import { authCheck, onLogout } from "../api/auth";
 import { unauthenticateUser } from "../redux/slices/authSlice";
 import Layout from "../components/layout";
 import Header from "../components/header";
-import Footer from "../components/footer";
 import InboxItem from "../components/inboxItem";
 import TaskModel from "../components/taskModel";
-import Navbar from "../components/navbar";
 import Loading from "../components/loading";
 
 const Dashboard = () => {
@@ -54,8 +52,7 @@ const Dashboard = () => {
       <Loading />
     </Layout>
   ) : (
-    <div>
-      <Navbar />
+    <Layout>
       <Header />
       <div className="container">
         {/* <h1 className="text-center mt-3">
@@ -78,8 +75,7 @@ const Dashboard = () => {
         </div>
         <TaskModel />
       </div>
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 

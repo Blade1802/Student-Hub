@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createTasks } from "../api/tasks";
+import ToastComponent from "./toast";
 
 const TaskModel = () => {
   const [values, setValues] = useState({
     title: "",
     url: "",
   });
+  const [showToast, setShowToast] = useState(false);
+  const [toastSuccess, setToastSuccess] = useState(true);
+  const [toastMessage, setToastMessage] = useState("");
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -16,23 +20,30 @@ const TaskModel = () => {
 
     try {
       await createTasks(values);
+      setToastMessage("Task created successfully!");
+      setToastSuccess(true);
+      setShowToast(true);
+      setValues({ title: "", url: "" });
     } catch (error) {
       console.log(error.response.data.errors[0].msg);
+      setToastMessage(
+        error.response.data.errors[0].msg || "Error creating task."
+      );
+      setToastSuccess(false);
+      setShowToast(true);
+    } finally {
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
     }
   };
 
-  return (
-    <div>
-      {/* Task Model Button */}
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#taskModal"
-      >
-        Create Task
-      </button>
+  const closeToast = () => {
+    setShowToast(false);
+  };
 
+  return (
+    <>
       {/* Task Model */}
       <div
         className="modal fade"
@@ -107,7 +118,14 @@ const TaskModel = () => {
           </div>
         </div>
       </div>
-    </div>
+
+      <ToastComponent
+        message={toastMessage}
+        showToast={showToast}
+        onClose={closeToast}
+        isSuccess={toastSuccess}
+      />
+    </>
   );
 };
 
