@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchTasks } from "../api/tasks";
 import { add, formatDistance } from "date-fns";
-import "./inboxItem.css";
 
 const InboxItem = ({ user_id }) => {
   const [tasks, setTasks] = useState([]);
@@ -29,7 +28,30 @@ const InboxItem = ({ user_id }) => {
   };
 
   return (
-    <div className="bg-white border rounded-4">
+    <div
+      className="bg-white border rounded-4"
+      style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)" }}
+    >
+      <style>
+        {`
+        .task-container {
+          transition: border 0.3s ease;
+          border: 1px solid transparent;
+        }
+        
+        .task-container:hover {
+          /* border: 1px solid #007bff; */
+          border: 1px solid #000000;
+          cursor: pointer;
+        }
+        
+        .icon {
+          font-size: 30px;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 50%;
+        }
+        `}
+      </style>
       {tasks.map((task) => {
         const relativeTime = formatDistance(
           new Date(task.task_createdat),

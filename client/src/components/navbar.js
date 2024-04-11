@@ -96,7 +96,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li className="nav-item px-1">
-                  <NavLink className="nav-link" to="/">
+                  <NavLink className="nav-link" to="/inbox">
                     <i className="bi bi-inbox fs-5"></i>
                   </NavLink>
                 </li>
