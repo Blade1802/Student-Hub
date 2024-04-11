@@ -66,7 +66,7 @@ const ViewApps = ({ apps, setApps }) => {
         </div>
         {apps.length > 0 ? (
           apps.map((app) => (
-            <div className="row m-1 align-items-center" key={app.id}>
+            <div className="row m-1 my-3 align-items-center" key={app.id}>
               <div className="col-10 col-sm-10 col-md-10 d-flex align-items-center position-relative">
                 <img
                   src={`http://localhost:4000/${app.image_url.replace(
