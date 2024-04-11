@@ -1,5 +1,6 @@
 -- Drop existing tables if they exist to start fresh
-DROP TABLE IF EXISTS adminTasks,
+DROP TABLE IF EXISTS apps,
+adminTasks,
 tasks,
 users CASCADE;
 -- Create Users Table
@@ -24,6 +25,13 @@ CREATE TABLE tasks(
 CREATE TABLE adminTasks(
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) UNIQUE NOT NULL
+);
+-- Create Apps Table
+CREATE TABLE apps (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255),
+  app_link VARCHAR(255) NOT NULL
 );
 -- Insert Dummy Data for Users
 INSERT INTO users (user_email, user_password, user_name, user_type)
@@ -137,5 +145,20 @@ VALUES (
     '2024-04-10',
     3
   );
+-- Insert Dummy adminTasks
 INSERT INTO adminTasks (title)
-VALUES ('Create Task');
+VALUES ('Create Task'),
+  ('Create App'),
+  ('Create Announcement');
+-- Insert Dummy Apps
+INSERT INTO apps (name, image_url, app_link)
+VALUES (
+    'Library',
+    'uploads\library.png',
+    'https://www.tudublin.ie/library/'
+  ),
+  (
+    'Brightspace',
+    'uploads\brightspace.png',
+    'https://brightspace.tudublin.ie/d2l/home'
+  );

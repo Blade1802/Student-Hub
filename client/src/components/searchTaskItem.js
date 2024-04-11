@@ -1,7 +1,9 @@
+import AppModel from "./appModel";
 import TaskModel from "./taskModel";
 
 const TASK_TYPE_MODAL_MAPPING = {
   "create task": { component: TaskModel, modalId: "createTaskModal" },
+  "create app": { component: AppModel, modalId: "createAppModal" },
   // Add other mappings as necessary
 };
 
@@ -13,7 +15,7 @@ const TaskItem = ({ task }) => {
   return (
     <>
       <div style={{ width: "65%" }}>
-        <div className="card-body p-4">
+        <div className="card-body m-4">
           {ModalComponent ? (
             <>
               <a
@@ -31,7 +33,6 @@ const TaskItem = ({ task }) => {
           <p className="card-text text-secondary">Task</p>
         </div>
       </div>
-      <ModalComponent />
     </>
   );
 };

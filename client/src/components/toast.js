@@ -1,20 +1,20 @@
 // ToastComponent.js
 import React, { useEffect } from "react";
 
-const ToastComponent = ({ message, showToast, onClose, isSuccess }) => {
+const ToastComponent = ({ id, message, showToast, onClose, isSuccess }) => {
   useEffect(() => {
     if (showToast) {
-      const toastEl = document.getElementById("serverResponseToast");
+      const toastEl = document.getElementById(id);
       const toast = new window.bootstrap.Toast(toastEl);
       toast.show();
     }
-  }, [showToast]);
+  }, [id, showToast]);
 
   const badgeClass = isSuccess ? "bg-success" : "bg-danger";
 
   return (
     <div
-      id="serverResponseToast"
+      id={id}
       className="toast align-items-center text-black bg-white border-1"
       role="alert"
       aria-live="assertive"
@@ -27,7 +27,7 @@ const ToastComponent = ({ message, showToast, onClose, isSuccess }) => {
           <span className="visually-hidden">Response</span>
         </span>
         <strong className="me-auto ms-1">Response</strong>
-        <small>11 mins ago</small>
+        <small>1 sec ago</small>
         <button
           type="button"
           className="btn-close"

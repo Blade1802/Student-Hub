@@ -5,8 +5,8 @@ import { unauthenticateUser } from "../redux/slices/authSlice";
 import Layout from "../components/layout";
 import Header from "../components/header";
 import InboxItem from "../components/inboxItem";
-import TaskModel from "../components/taskModel";
 import Loading from "../components/loading";
+import AppsComponent from "../components/dashboardApps";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -61,20 +61,26 @@ const Dashboard = () => {
         </h1> */}
         <div className="row mt-5">
           <div className="col-4">
-            <dt className="fs-2">
-              {today.getHours() < 12 ? "Good Morning" : "Good Afternoon"},{" "}
-              {user.user_name}
-            </dt>
-            <dt className="text-secondary mt-5 fs-5">It's {todayDate}</dt>
+            <div>
+              <strong className="fs-2">
+                {today.getHours() < 12 ? "Good Morning" : "Good Afternoon"},{" "}
+                {user.user_name}
+              </strong>
+            </div>
+            <div className="mt-5">
+              <strong className="text-secondary fs-5">It's {todayDate}</strong>
+            </div>
+            <div className="mt-5">
+              <AppsComponent />
+            </div>
           </div>
           <div className="col">
-            <dt className="fs-4">Inbox</dt>
+            <strong className="fs-4">Inbox</strong>
             <div className="mt-5">
               <InboxItem user_id={user.user_id} />
             </div>
           </div>
         </div>
-        <TaskModel />
       </div>
     </Layout>
   );

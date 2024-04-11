@@ -1,31 +1,51 @@
-import { useState } from "react";
-import { createTasks } from "../api/tasks";
+import { useRef, useState } from "react";
+import { createApp } from "../api/apps";
 import ToastComponent from "./toast";
 
-const TaskModel = () => {
+const AppModel = () => {
   const [values, setValues] = useState({
-    title: "",
-    url: "",
+    appName: "",
+    appLink: "",
   });
+  const appImageRef = useRef(null);
   const [showToast, setShowToast] = useState(false);
   const [toastSuccess, setToastSuccess] = useState(true);
   const [toastMessage, setToastMessage] = useState("");
 
   const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    if (e.target.name === "appImage") {
+      // Check if there's a file selected
+      if (e.target.files && e.target.files[0]) {
+        // Update state to hold the selected file
+        setValues({ ...values, [e.target.name]: e.target.files[0] });
+      }
+    } else {
+      // For text inputs, store the value as usual
+      setValues({ ...values, [e.target.name]: e.target.value });
+    }
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await createTasks(values);
-      setToastMessage("Task created successfully!");
+      const formData = new FormData();
+      formData.append("appName", values.appName);
+      formData.append("appLink", values.appLink);
+      if (appImageRef.current && appImageRef.current.files[0]) {
+        formData.append("appImage", appImageRef.current.files[0]);
+      }
+      setToastMessage("App created successfully!");
+      await createApp(formData);
       setToastSuccess(true);
       setShowToast(true);
-      setValues({ title: "", url: "" });
+      setValues({
+        appName: "",
+        appLink: "",
+      });
+      if (appImageRef.current) appImageRef.current.value = "";
       // Close the modal on successful submission
-      const modalElement = document.getElementById("createTaskModal");
+      const modalElement = document.getElementById("createAppModal");
       if (window.bootstrap && modalElement) {
         const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
         if (modalInstance) {
@@ -33,10 +53,8 @@ const TaskModel = () => {
         }
       }
     } catch (error) {
-      console.log(error.response.data.errors[0].msg);
-      setToastMessage(
-        error.response.data.errors[0].msg || "Error creating task."
-      );
+      console.log(error);
+      setToastMessage("Error creating app.");
       setToastSuccess(false);
       setShowToast(true);
     } finally {
@@ -54,19 +72,19 @@ const TaskModel = () => {
 
   return (
     <>
-      {/* Task Model */}
+      {/* App Model */}
       <div
         className="modal fade"
-        id="createTaskModal"
+        id="createAppModal"
         tabIndex="-1"
-        aria-labelledby="taskModalLabel"
+        aria-labelledby="appModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="taskModalLabel">
-                Create Task for Students
+              <h1 className="modal-title fs-5" id="appModalLabel">
+                Create App
               </h1>
               <button
                 type="button"
@@ -79,30 +97,44 @@ const TaskModel = () => {
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="modal-body">
                 <div className="mb-3">
-                  <label htmlFor="title" className="col-form-label">
-                    Title:
+                  <label htmlFor="appName" className="col-form-label">
+                    App Name:
                   </label>
                   <input
                     onChange={(e) => onChange(e)}
                     type="text"
                     className="form-control"
-                    name="title"
-                    value={values.title}
-                    id="title"
+                    name="appName"
+                    value={values.appName}
+                    id="appName"
                     required
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="url" className="col-form-label">
-                    URL:
+                  <label htmlFor="appLink" className="col-form-label">
+                    App Link:
                   </label>
                   <input
                     onChange={(e) => onChange(e)}
                     type="url"
                     className="form-control"
-                    name="url"
-                    value={values.url}
-                    id="url"
+                    name="appLink"
+                    value={values.appLink}
+                    id="appLink"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="appImage" className="col-form-label">
+                    App Image:
+                  </label>
+                  <input
+                    onChange={(e) => onChange(e)}
+                    type="file"
+                    className="form-control"
+                    name="appImage"
+                    ref={appImageRef}
+                    id="appImage"
                     required
                   />
                 </div>
@@ -117,7 +149,7 @@ const TaskModel = () => {
                   Close
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  Create Task
+                  Create App
                 </button>
               </div>
             </form>
@@ -126,7 +158,7 @@ const TaskModel = () => {
       </div>
 
       <ToastComponent
-        id="createTaskResponse"
+        id="createAppResponse"
         message={toastMessage}
         showToast={showToast}
         onClose={closeToast}
@@ -136,4 +168,4 @@ const TaskModel = () => {
   );
 };
 
-export default TaskModel;
+export default AppModel;
