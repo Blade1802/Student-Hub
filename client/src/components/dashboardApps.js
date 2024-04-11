@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./inboxItem.css";
 import { fetchApps } from "../api/apps";
+import ViewApps from "./viewApps";
 
 const AppsComponent = () => {
   const [apps, setApps] = useState([]);
@@ -21,13 +21,19 @@ const AppsComponent = () => {
 
   return (
     <div>
+      <ViewApps apps={apps} />
       <div className="row align-items-center mb-3">
         <div className="col">
           <strong className="fs-4">Your Apps</strong>
         </div>
         <div className="col">
-          <button className="btn border border-dark rounded-pill">
-            Modify
+          <button
+            className="btn border border-dark rounded-pill"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#viewApps"
+            aria-controls="viewApps"
+          >
+            View All
           </button>
         </div>
       </div>
