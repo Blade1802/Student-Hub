@@ -15,4 +15,7 @@ router.post(
   appController.uploadApp
 );
 
+// Route to delete an app by ID
+router.delete("/delete-app/:appId", userAuth, appController.deleteApp);
+
 module.exports = router;

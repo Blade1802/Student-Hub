@@ -21,7 +21,6 @@ const AppsComponent = () => {
 
   return (
     <div>
-      <ViewApps apps={apps} />
       <div className="row align-items-center mb-3">
         <div className="col">
           <strong className="fs-4">Your Apps</strong>
@@ -57,6 +56,7 @@ const AppsComponent = () => {
           </div>
         </div>
       ))}
+      <ViewApps apps={apps} setApps={setApps} />
     </div>
   );
 };

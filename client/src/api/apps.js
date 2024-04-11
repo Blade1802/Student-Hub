@@ -10,3 +10,10 @@ export async function fetchApps() {
 export async function createApp(appData) {
   return await axios.post("http://localhost:4000/api/apps/upload-app", appData);
 }
+
+// API Delete App
+export async function deleteApp(appID) {
+  return await axios.delete(
+    `http://localhost:4000/api/apps/delete-app/${appID}`
+  );
+}

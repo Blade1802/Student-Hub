@@ -1,4 +1,20 @@
-const ViewApps = ({ apps }) => {
+import React from "react";
+import { deleteApp } from "../api/apps";
+
+const ViewApps = ({ apps, setApps }) => {
+  const handleClick = async (appId) => {
+    try {
+      // Call the API to delete the app
+      await deleteApp(appId);
+      // Filter out the deleted app from the apps state
+      const updatedApps = apps.filter((app) => app.id !== appId);
+      setApps(updatedApps); // Update state
+    } catch (error) {
+      console.error("Error deleting app:", error);
+      // Handle error (e.g., show an error message)
+    }
+  };
+
   return (
     <div
       className="offcanvas offcanvas-start"
@@ -18,34 +34,41 @@ const ViewApps = ({ apps }) => {
         ></button>
       </div>
       <div className="offcanvas-body">
-        {apps.map((app, index) => (
-          <div className="m-1 row" key={index}>
-            <div className="col-6 mb-2 d-flex align-items-center position-relative">
-              <img
-                src={`http://localhost:4000/${app.image_url.replace(
-                  "\\",
-                  "/"
-                )}`}
-                alt={`${app.name} icon`}
-                className="me-2 rounded-5"
-                style={{ width: "60px", height: "60px", objectFit: "cover" }}
-              />
-              <strong className="fs-4 mx-3">{app.name}</strong>
-              <a
-                href={app.app_link}
-                className="stretched-link"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open ${app.name}`}
-              ></a>
+        {apps.length > 0 ? (
+          apps.map((app, index) => (
+            <div className="row m-1 align-items-center" key={app.id || index}>
+              <div className="col-10 col-sm-10 col-md-10 d-flex align-items-center  position-relative">
+                <img
+                  src={`http://localhost:4000/${app.image_url.replace(
+                    "\\",
+                    "/"
+                  )}`}
+                  alt={`${app.name} icon`}
+                  className="me-2 rounded-5"
+                  style={{ width: "60px", height: "60px", objectFit: "cover" }}
+                />
+                <strong className="fs-5 mx-2">{app.name}</strong>
+                <a
+                  href={app.app_link}
+                  className="stretched-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${app.name}`}
+                ></a>
+              </div>
+              <div className="col-2 col-sm-2 col-md-2 text-end">
+                <button
+                  className="btn btn-outline-danger btn-sm"
+                  onClick={handleClick(app.id)}
+                >
+                  <i className="bi bi-trash"></i>
+                </button>
+              </div>
             </div>
-            <div className="col-6 d-flex align-items-center ms-auto">
-              <span>
-                <i class="bi bi-trash"></i>
-              </span>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No apps available.</p>
+        )}
       </div>
     </div>
   );

@@ -35,7 +35,34 @@ const uploadApp = async (req, res) => {
   }
 };
 
+// Function to delete an app by ID
+const deleteApp = async (req, res) => {
+  const { appId } = req.params;
+
+  try {
+    const deleteQuery = "DELETE FROM apps WHERE id = $1 RETURNING *";
+    const result = await db.query(deleteQuery, [appId]);
+
+    if (result.rows.length === 0) {
+      // No rows were returned, which means there was no record to delete
+      return res.status(404).json({ message: "App not found" });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "App deleted successfully",
+      data: {
+        app: result.rows[0],
+      },
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports = {
   getApps,
   uploadApp,
+  deleteApp,
 };
