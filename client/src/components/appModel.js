@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { createApp } from "../api/apps";
 import ToastComponent from "./toast";
 
-const AppModel = () => {
+const AppModel = ({ onAppCreated }) => {
   const [values, setValues] = useState({
     appName: "",
     appLink: "",
@@ -36,7 +36,13 @@ const AppModel = () => {
         formData.append("appImage", appImageRef.current.files[0]);
       }
       setToastMessage("App created successfully!");
-      await createApp(formData);
+      const response = await createApp(formData);
+      const newApp = response.data.app;
+      // Check if onAppCreated is provided and is a function, then call it
+      if (onAppCreated && typeof onAppCreated === "function") {
+        onAppCreated(newApp);
+      }
+
       setToastSuccess(true);
       setShowToast(true);
       setValues({

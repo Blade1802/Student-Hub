@@ -24,10 +24,7 @@ const uploadApp = async (req, res) => {
     const result = await db.query(query, values);
 
     res.status(201).json({
-      status: "success",
-      data: {
-        app: result.rows[0],
-      },
+      app: result.rows[0],
     });
   } catch (err) {
     console.error(err.message);
