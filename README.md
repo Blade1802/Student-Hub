@@ -5,11 +5,8 @@ Final year project
 ## Setting up the project
 
 - Rename the `server/.env.example` file in the server directory to `.env`
-- Edit the environment variables according to your Postgres credentials
+- Edit the environment variables according to your Postgres credentials and MongoDB URI
 - Create a database in postgres using psql or anything similar, ensure the same database is used in your `.env` file.
-- Setup the database (includes dummy data) using SQL in `server/db.sql`.
-- Omit `CREATE DATABASE` on `line 1` if you are changing the database name.
-- Ensure you are creating the tables in the right database.
 
 ## Running the project
 
@@ -17,7 +14,8 @@ Final year project
 
 - Open a terminal in the project directory.
 - Navigate into the server directory using `cd .\server\`.
-- Install all the dependencies using `npm install`
+- Install all the dependencies using `npm install`.
+- Setup the database (includes dummy data) using `npm run reset-db`.
 - Start the server using `npm start`.
 - `server has started on port $PORT` should be printed on the terminal.
 

@@ -1,5 +1,6 @@
 -- Drop existing tables if they exist to start fresh
-DROP TABLE IF EXISTS apps,
+DROP TABLE IF EXISTS announcements,
+apps,
 adminTasks,
 tasks,
 users CASCADE;
@@ -32,6 +33,14 @@ CREATE TABLE apps (
   name VARCHAR(255) NOT NULL,
   image_url VARCHAR(255),
   app_link VARCHAR(255) NOT NULL
+);
+-- Create Announcements Table
+CREATE TABLE announcements (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255),
+  description TEXT NOT NULL,
+  createdAt DATE DEFAULT CURRENT_DATE
 );
 -- Insert Dummy Data for Users
 INSERT INTO users (user_email, user_password, user_name, user_type)
@@ -161,4 +170,15 @@ VALUES (
     'Brightspace',
     'uploads\brightspace.png',
     'https://brightspace.tudublin.ie/d2l/home'
+  );
+INSERT INTO announcements (title, image_url, description)
+VALUES (
+    'Response to the COVID-19 Pandemic',
+    'uploads\covid.jpg',
+    'All COVID-19 restrictions for travelling to Ireland have been lifted. You no longer need to complete a passenger locator form. You also no longer need proof of vaccination or recovery, or a COVID-19 test.'
+  ),
+  (
+    'Emergency Communications',
+    'uploads\covid.jpg',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla porttitor massa id neque aliquam vestibulum morbi.'
   );

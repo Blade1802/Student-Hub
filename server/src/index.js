@@ -10,6 +10,7 @@ const taskRoutes = require("./routes/tasks");
 const studentRoutes = require("./routes/students");
 const searchRoutes = require("./routes/search");
 const appsRoutes = require("./routes/apps");
+const announcementsRoutes = require("./routes/announcements");
 const { connectDB } = require("./db");
 
 // Passport middleware
@@ -30,6 +31,7 @@ app.use("/api", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api/announcements", announcementsRoutes);
 app.use("/api/apps", appsRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 

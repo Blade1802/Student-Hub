@@ -7,6 +7,7 @@ import Header from "../components/header";
 import InboxItem from "../components/inboxItem";
 import Loading from "../components/loading";
 import AppsComponent from "../components/dashboardApps";
+import Announcement from "../components/announcementItem";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -76,8 +77,12 @@ const Dashboard = () => {
           </div>
           <div className="col">
             <strong className="fs-4">Inbox</strong>
-            <div className="mt-5">
+            <div className="my-5">
               <InboxItem user_id={user.user_id} />
+            </div>
+            <strong className="fs-4">Announcements</strong>
+            <div className="my-4">
+              <Announcement />
             </div>
           </div>
         </div>
