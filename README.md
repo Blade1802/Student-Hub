@@ -26,7 +26,6 @@ Final year project
 - Install all the dependencies using `npm install`
 - Start the client using `npm start`.
 - Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-- Home page is still under development so move to the login page by clicking on the login button on the top right of the navbar.
 
 ## Dummy User Information
 
