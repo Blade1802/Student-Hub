@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
 };
 
 // Access protected information
-exports.protected = async (req, res) => {
+exports._protected = async (req, res) => {
   try {
     return res.status(200).json({
       info: "protected-info",

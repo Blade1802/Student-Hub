@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getUsers, login, protected, logout } = require("../controllers/auth");
+const { getUsers, login, _protected, logout } = require("../controllers/auth");
 const loginValidation = require("../validators/auth");
 const {
   validationMiddleware,
@@ -19,7 +19,7 @@ router.get("/authCheck", userAuth, async (req, res) => {
     console.error(err);
   }
 });
-router.get("/protected", userAuth, protected);
+router.get("/protected", userAuth, _protected);
 router.get("/logout", logout);
 
 module.exports = router;

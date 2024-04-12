@@ -4,6 +4,15 @@ require("dotenv").config();
 const { Pool } = require("pg");
 const pool = new Pool();
 
+const closePool = async () => {
+  try {
+    await pool.end();
+    console.log("PostgreSQL pool has been closed.");
+  } catch (err) {
+    console.error("Failed to close PostgreSQL pool:", err.message);
+  }
+};
+
 // MongoDB Connection Module
 const mongoose = require("mongoose");
 
@@ -19,8 +28,19 @@ const connectDB = async () => {
   }
 };
 
+const closeDB = async () => {
+  try {
+    await mongoose.disconnect();
+    console.log("MongoDB connection closed successfully.");
+  } catch (err) {
+    console.error("Failed to close MongoDB connection:", err.message);
+  }
+};
+
 // Exporting both PostgreSQL and MongoDB functionalities
 module.exports = {
   query: (text, params) => pool.query(text, params),
+  closePool,
   connectDB,
+  closeDB,
 };
