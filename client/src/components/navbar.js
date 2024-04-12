@@ -50,7 +50,11 @@ const Navbar = () => {
       }}
     >
       <div className="container-fluid">
-        <NavLink className="navbar-brand px-1" to="/">
+        <NavLink
+          className="navbar-brand px-1"
+          aria-label="Student Hub Icon"
+          to="/"
+        >
           <i className="bi bi-mortarboard-fill fs-4"></i>
         </NavLink>
         <button
@@ -91,12 +95,20 @@ const Navbar = () => {
             {isAuth ? (
               <>
                 <li className="nav-item px-1">
-                  <NavLink className="nav-link" to="/">
+                  <NavLink
+                    className="nav-link"
+                    aria-label="Notification Icon"
+                    to="/"
+                  >
                     <i className="bi bi-bell fs-5"></i>
                   </NavLink>
                 </li>
                 <li className="nav-item px-1">
-                  <NavLink className="nav-link" to="/inbox">
+                  <NavLink
+                    className="nav-link"
+                    aria-label="Inbox Icon"
+                    to="/inbox"
+                  >
                     <i className="bi bi-inbox fs-5"></i>
                   </NavLink>
                 </li>
@@ -106,6 +118,7 @@ const Navbar = () => {
                     id="navbarDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    aria-label="User Icon"
                   >
                     <i className="bi bi-person-circle fs-5"></i>
                   </button>
