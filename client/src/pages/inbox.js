@@ -67,12 +67,6 @@ const Dashboard = () => {
         className="d-flex p-3 flex-column align-items-stretch flex-shrink-0 bg-light border-end"
         style={{ width: "380px", height: "100vh" }}
       >
-        <a
-          href="/"
-          className="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
-        >
-          <span className="fs-5 fw-semibold">List group</span>
-        </a>
         <div className="list-group list-group-flush border-bottom scrollarea">
           {tasks.map((task) => {
             const relativeTime = formatDistance(

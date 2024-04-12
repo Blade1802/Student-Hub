@@ -2,7 +2,7 @@ require("dotenv").config();
 const { exec } = require("child_process");
 const mongoose = require("mongoose");
 const Student = require("../models/student");
-const students = require("../fixtures/students");
+const studentFixture = require("../fixtures/students");
 
 // Reset PostgreSQL Database
 const resetPostgresDB = () => {
@@ -36,7 +36,7 @@ const resetMongoDB = async () => {
     await mongoose.connection.db.dropDatabase();
     console.log("MongoDB Database has been dropped.");
 
-    await Student.insertMany(students);
+    await Student.insertMany(studentFixture);
     console.log("MongoDB Dummy data has been inserted.");
   } catch (err) {
     console.error("MongoDB connection error:", err);
