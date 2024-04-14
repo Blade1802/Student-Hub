@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const path = require("path");
+const cron = require("node-cron");
 const db = require("./db");
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
@@ -25,6 +26,12 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 connectDB();
+
+// Schedule the cleanup of old tasks daily at midnight
+cron.schedule("0 0 * * *", () => {
+  console.log("Running scheduled task cleanup...");
+  db.deleteOldTasks();
+});
 
 // routes
 app.use("/api", authRoutes);

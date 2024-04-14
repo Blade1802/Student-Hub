@@ -13,6 +13,20 @@ const closePool = async () => {
   }
 };
 
+// Function to delete old tasks
+const deleteOldTasks = async () => {
+  const query = `
+    DELETE FROM tasks
+    WHERE task_deadline < CURRENT_DATE - INTERVAL '1 month';
+  `;
+  try {
+    const res = await pool.query(query);
+    console.log("Deleted old tasks:", res.rowCount);
+  } catch (err) {
+    console.error("Error deleting old tasks:", err.message);
+  }
+};
+
 // MongoDB Connection Module
 const mongoose = require("mongoose");
 
@@ -40,6 +54,7 @@ const closeDB = async () => {
 // Exporting both PostgreSQL and MongoDB functionalities
 module.exports = {
   query: (text, params) => pool.query(text, params),
+  deleteOldTasks,
   closePool,
   connectDB,
   closeDB,
