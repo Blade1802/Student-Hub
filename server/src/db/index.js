@@ -13,12 +13,13 @@ const closePool = async () => {
   }
 };
 
-// Function to delete old tasks
 const deleteOldTasks = async () => {
+  const interval = process.env.CLEANUP_INTERVAL || "1 month"; // Default to '1 month' if not specified
   const query = `
     DELETE FROM tasks
-    WHERE task_deadline < CURRENT_DATE - INTERVAL '1 month';
+    WHERE task_deadline < CURRENT_DATE - INTERVAL '${interval}';
   `;
+
   try {
     const res = await pool.query(query);
     console.log("Deleted old tasks:", res.rowCount);
