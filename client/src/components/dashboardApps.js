@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchApps } from "../api/apps";
 import ViewApps from "./viewApps";
+import { NavLink } from "react-router-dom";
 
 const AppsComponent = () => {
   const [apps, setApps] = useState([]);
@@ -34,6 +35,19 @@ const AppsComponent = () => {
           >
             View All
           </button>
+        </div>
+      </div>
+      <div className="m-1 row" key="finance">
+        <div className="col-4 mb-2 d-flex align-items-center w-100 position-relative">
+          <NavLink
+            className="navbar-brand px-1"
+            aria-label="Student Hub Icon"
+            to="/finances"
+          >
+            <i className="bi bi-bank2 fs-1 mx-1"></i>
+
+            <strong className="fs-4 mx-4"> Finances</strong>
+          </NavLink>
         </div>
       </div>
       {apps.map((app, index) => (

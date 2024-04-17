@@ -16,7 +16,10 @@ const StudentItem = ({ student }) => {
           }
         `}
       </style>
-      <div className="card my-3" style={{ width: "65%" }}>
+      <div
+        className="card my-3"
+        style={{ width: "65%", boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)" }}
+      >
         <div className="card-body p-4">
           <h5 className="card-title text-primary">{student.name}</h5>
           <p className="card-text text-secondary">{student.id}</p>

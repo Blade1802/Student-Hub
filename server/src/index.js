@@ -8,6 +8,7 @@ const cron = require("node-cron");
 const db = require("./db");
 const authRoutes = require("./routes/auth");
 const taskRoutes = require("./routes/tasks");
+const financeRoutes = require("./routes/finances");
 const studentRoutes = require("./routes/students");
 const searchRoutes = require("./routes/search");
 const appsRoutes = require("./routes/apps");
@@ -36,6 +37,7 @@ cron.schedule("0 0 * * *", () => {
 // routes
 app.use("/api", authRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/finances", financeRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/announcements", announcementsRoutes);

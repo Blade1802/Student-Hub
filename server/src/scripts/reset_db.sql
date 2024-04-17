@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS announcements,
 apps,
 adminTasks,
+payments,
 tasks,
 users CASCADE;
 -- Create Users Table
@@ -19,6 +20,15 @@ CREATE TABLE tasks(
   task_url VARCHAR(255) NOT NULL,
   task_createdAt DATE DEFAULT CURRENT_DATE,
   task_deadline DATE DEFAULT (CURRENT_DATE + INTERVAL '7 days'),
+  user_id INTEGER,
+  CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+-- Payments Table
+CREATE TABLE payments(
+  payment_id SERIAL PRIMARY KEY,
+  payment_amount DECIMAL(10, 2) NOT NULL,
+  payment_method VARCHAR(255) NOT NULL,
+  payment_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   user_id INTEGER,
   CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
@@ -181,4 +191,46 @@ VALUES (
     'Emergency Communications',
     'uploads\covid.jpg',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla porttitor massa id neque aliquam vestibulum morbi.'
+  );
+INSERT INTO payments (
+    payment_amount,
+    payment_method,
+    user_id,
+    payment_date
+  )
+VALUES (
+    3819.00,
+    'Wire Payment',
+    1,
+    '2024-04-01 10:00:00+00'
+  ),
+  (
+    3000.00,
+    'Wire Payment',
+    1,
+    '2022-04-11 12:30:00+00'
+  ),
+  (
+    3819.00,
+    'General Payment',
+    1,
+    '2023-04-03 10:00:00+00'
+  ),
+  (
+    3819.00,
+    'General Payment',
+    1,
+    '2021-04-10 10:00:00+00'
+  ),
+  (
+    500.00,
+    'General Payment',
+    1,
+    '2024-04-22 18:00:00-05'
+  ),
+  (
+    2000.00,
+    'Wire Payment',
+    1,
+    '2020-04-17 10:00:00+00'
   );

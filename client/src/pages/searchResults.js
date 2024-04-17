@@ -57,7 +57,7 @@ const SearchResultsPage = () => {
             selectedCategory={selectedCategory}
             onCategoryChange={setSelectedCategory}
           />
-          <div className="container-fluid bg-light p-5">
+          <div className="container-fluid bg-white p-5 min-vh-100">
             {loading ? (
               <Loading />
             ) : error ? (

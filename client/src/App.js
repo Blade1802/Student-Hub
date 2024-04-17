@@ -11,6 +11,7 @@ import Login from "./pages/login";
 import SearchResults from "./pages/searchResults";
 import Inbox from "./pages/inbox";
 import { useSelector } from "react-redux";
+import FinancialOverviewPage from "./pages/finances";
 
 const PrivateRoutes = () => {
   const { isAuth } = useSelector((state) => state.auth);
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/inbox" element={<Inbox />} />
+          <Route path="/finances" element={<FinancialOverviewPage />} />
         </Route>
 
         <Route element={<RestrictedRoutes />}>
