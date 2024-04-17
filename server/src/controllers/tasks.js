@@ -22,11 +22,17 @@ exports.getTasks = async (req, res) => {
 exports.createTasks = async (req, res) => {
   try {
     if (req.user.user_type === "admin") {
-      const users = (
-        await db.query("SELECT user_id FROM users WHERE user_type = $1", [
-          "student",
-        ])
-      ).rows;
+      if (req.body.user_type === "everyone") {
+        query = "SELECT user_id FROM users";
+      } else if (req.body.user_type === "admin") {
+        query = "SELECT user_id FROM users WHERE user_type = 'admin'";
+      } else if (req.body.user_type === "student") {
+        query = "SELECT user_id FROM users WHERE user_type = 'student'";
+      } else {
+        throw new Error("Unsupported user type");
+      }
+
+      const users = (await db.query(query)).rows;
       users.forEach(async (user) => {
         await db.query(
           "INSERT INTO tasks (task_title, task_url, user_id) VALUES ($1, $2, $3)",

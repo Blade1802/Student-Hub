@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { createTasks } from "../api/tasks";
+import { add } from "date-fns";
 import ToastComponent from "./toast";
 
 const TaskModel = () => {
   const [values, setValues] = useState({
     title: "",
     url: "",
+    deadline: add(new Date(), { days: 7 }).toISOString().split("T")[0],
+    user_type: "everyone",
   });
   const [showToast, setShowToast] = useState(false);
   const [toastSuccess, setToastSuccess] = useState(true);
@@ -23,7 +26,12 @@ const TaskModel = () => {
       setToastMessage("Task created successfully!");
       setToastSuccess(true);
       setShowToast(true);
-      setValues({ title: "", url: "" });
+      setValues({
+        title: "",
+        url: "",
+        deadline: add(new Date(), { days: 7 }).toISOString().split("T")[0],
+        user_type: "everyone",
+      });
       // Close the modal on successful submission
       const modalElement = document.getElementById("createTaskModal");
       if (window.bootstrap && modalElement) {
@@ -33,10 +41,8 @@ const TaskModel = () => {
         }
       }
     } catch (error) {
-      console.log(error.response.data.errors[0].msg);
-      setToastMessage(
-        error.response.data.errors[0].msg || "Error creating task."
-      );
+      console.log(error);
+      setToastMessage("Error creating task.");
       setToastSuccess(false);
       setShowToast(true);
     } finally {
@@ -77,7 +83,7 @@ const TaskModel = () => {
             </div>
 
             <form onSubmit={(e) => onSubmit(e)}>
-              <div className="modal-body">
+              <div className="modal-body row">
                 <div className="mb-3">
                   <label htmlFor="title" className="col-form-label">
                     Title:
@@ -105,6 +111,38 @@ const TaskModel = () => {
                     id="url"
                     required
                   />
+                </div>
+                <div className="mb-3 col-6">
+                  <label htmlFor="deadline" className="col-form-label">
+                    Deadline:
+                  </label>
+                  <input
+                    onChange={onChange}
+                    type="date"
+                    className="form-control"
+                    name="deadline"
+                    value={values.deadline}
+                    id="deadline"
+                    min={new Date().toISOString().split("T")[0]} // Set minimum date to today
+                    required
+                  />
+                </div>
+                <div className="mb-3 col-6">
+                  <label htmlFor="user_type" className="col-form-label">
+                    User Type:
+                  </label>
+                  <select
+                    onChange={(e) => onChange(e)}
+                    className="form-select"
+                    name="user_type"
+                    value={values.user_type}
+                    id="user_type"
+                    required
+                  >
+                    <option value="everyone">Everyone</option>
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                  </select>
                 </div>
               </div>
 
