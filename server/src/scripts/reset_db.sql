@@ -35,7 +35,8 @@ CREATE TABLE payments(
 -- Create Admin Tasks Table
 CREATE TABLE adminTasks(
   id SERIAL PRIMARY KEY,
-  title VARCHAR(255) UNIQUE NOT NULL
+  title VARCHAR(255) UNIQUE NOT NULL,
+  restricted BOOLEAN
 );
 -- Create Apps Table
 CREATE TABLE apps (
@@ -167,10 +168,10 @@ VALUES (
     3
   );
 -- Insert Dummy adminTasks
-INSERT INTO adminTasks (title)
-VALUES ('Create Task'),
-  ('Create App'),
-  ('Create Announcement');
+INSERT INTO adminTasks (title, restricted)
+VALUES ('Create Task', TRUE),
+  ('Create App', FALSE),
+  ('Create Announcement', TRUE);
 -- Insert Dummy Apps
 INSERT INTO apps (name, image_url, app_link, user_id)
 VALUES (

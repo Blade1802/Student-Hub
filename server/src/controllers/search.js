@@ -23,11 +23,18 @@ const getSearchData = async (req, res) => {
     // Retrieve filtered students from the database
     const students = await Student.find(searchCriteria);
 
+    let query;
+    if (req.user.user_type === "admin") {
+      query = "SELECT * FROM adminTasks WHERE title ILIKE $1";
+    } else if (req.user.user_type === "student") {
+      query =
+        "SELECT * FROM adminTasks WHERE title ILIKE $1 AND restricted = FALSE";
+    } else {
+      throw new Error("Unsupported user type");
+    }
+
     // Retrieve filtered adminTasks from the database
-    const tasks = await db.query(
-      "SELECT * FROM adminTasks WHERE title ILIKE $1",
-      [`%${searchQuery}%`]
-    );
+    const tasks = await db.query(query, [`%${searchQuery}%`]);
 
     res.status(200).json({
       students: students,
