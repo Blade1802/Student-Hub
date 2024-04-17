@@ -42,7 +42,9 @@ CREATE TABLE apps (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   image_url VARCHAR(255),
-  app_link VARCHAR(255) NOT NULL
+  app_link VARCHAR(255) NOT NULL,
+  user_id INTEGER NOT NULL,
+  CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 -- Create Announcements Table
 CREATE TABLE announcements (
@@ -170,16 +172,18 @@ VALUES ('Create Task'),
   ('Create App'),
   ('Create Announcement');
 -- Insert Dummy Apps
-INSERT INTO apps (name, image_url, app_link)
+INSERT INTO apps (name, image_url, app_link, user_id)
 VALUES (
     'Library',
     'uploads\library.png',
-    'https://www.tudublin.ie/library/'
+    'https://www.tudublin.ie/library/',
+    1
   ),
   (
     'Brightspace',
     'uploads\brightspace.png',
-    'https://brightspace.tudublin.ie/d2l/home'
+    'https://brightspace.tudublin.ie/d2l/home',
+    1
   );
 INSERT INTO announcements (title, image_url, description)
 VALUES (

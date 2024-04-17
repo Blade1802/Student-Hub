@@ -3,7 +3,7 @@ import { fetchApps } from "../api/apps";
 import ViewApps from "./viewApps";
 import { NavLink } from "react-router-dom";
 
-const AppsComponent = () => {
+const AppsComponent = ({ user }) => {
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const AppsComponent = () => {
           </NavLink>
         </div>
       </div>
-      {apps.map((app, index) => (
+      {apps.slice(0, 3).map((app, index) => (
         <div className="m-1 row" key={index}>
           <div className="col-4 mb-2 d-flex align-items-center w-100 position-relative">
             <img
@@ -70,7 +70,7 @@ const AppsComponent = () => {
           </div>
         </div>
       ))}
-      <ViewApps apps={apps} setApps={setApps} />
+      <ViewApps user={user} apps={apps} setApps={setApps} />
     </div>
   );
 };

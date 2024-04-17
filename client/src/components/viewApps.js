@@ -2,7 +2,7 @@ import React from "react";
 import { deleteApp } from "../api/apps";
 import AppModel from "./appModel";
 
-const ViewApps = ({ apps, setApps }) => {
+const ViewApps = ({ user, apps, setApps }) => {
   const handleClick = async (appId, appName) => {
     const isConfirmed = window.confirm(
       `Are you sure you want to delete ${appName}?`
@@ -87,12 +87,16 @@ const ViewApps = ({ apps, setApps }) => {
                 ></a>
               </div>
               <div className="col-2 col-sm-2 col-md-2 text-end">
-                <button
-                  className="btn btn-outline-danger btn-sm"
-                  onClick={() => handleClick(app.id, app.name)}
-                >
-                  <i className="bi bi-trash"></i>
-                </button>
+                {user?.user_id === app.user_id ? (
+                  <button
+                    className="btn btn-outline-danger btn-sm"
+                    onClick={() => handleClick(app.id, app.name)}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           ))

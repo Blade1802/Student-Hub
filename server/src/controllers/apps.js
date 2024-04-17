@@ -2,7 +2,10 @@ const db = require("../db");
 
 const getApps = async (req, res) => {
   try {
-    const result = await db.query("SELECT * FROM apps");
+    const result = await db.query(
+      "SELECT a.* FROM apps a JOIN users u ON a.user_id = u.user_id WHERE u.user_type = 'admin' OR a.user_id = $1 ORDER BY user_id",
+      [req.user.user_id]
+    );
     return res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
@@ -19,8 +22,8 @@ const uploadApp = async (req, res) => {
 
   try {
     const query =
-      "INSERT INTO apps(name, image_url, app_link) VALUES($1, $2, $3) RETURNING *";
-    const values = [appName, imageUrl, appLink];
+      "INSERT INTO apps(name, image_url, app_link, user_id) VALUES($1, $2, $3, $4) RETURNING *";
+    const values = [appName, imageUrl, appLink, req.user.user_id];
     const result = await db.query(query, values);
 
     res.status(201).json({

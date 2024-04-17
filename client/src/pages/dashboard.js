@@ -72,7 +72,7 @@ const Dashboard = () => {
               <strong className="text-secondary fs-5">It's {todayDate}</strong>
             </div>
             <div className="mt-5">
-              <AppsComponent />
+              <AppsComponent user={user} />
             </div>
           </div>
           <div className="col">
