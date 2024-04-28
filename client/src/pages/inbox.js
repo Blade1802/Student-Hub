@@ -5,7 +5,7 @@ import { unauthenticateUser } from "../redux/slices/authSlice";
 import Layout from "../components/layout";
 import Loading from "../components/loading";
 import { fetchTasks } from "../api/tasks";
-import { formatDistance } from "date-fns";
+import { formatDistance, startOfDay } from "date-fns";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const Dashboard = () => {
           {tasks.map((task) => {
             const relativeTime = formatDistance(
               new Date(task.task_createdat),
-              new Date(),
+              startOfDay(new Date()),
               { addSuffix: true }
             );
             return (

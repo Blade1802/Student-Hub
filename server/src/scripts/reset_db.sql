@@ -150,21 +150,21 @@ VALUES (
     'Register for FYP Demo',
     'https://forms.gle/VMdtmeLAxH6QMFP77',
     '2024-04-01',
-    '2024-04-25',
+    '2024-05-10',
     1
   ),
   (
     'Register for FYP Demo',
     'https://forms.gle/VMdtmeLAxH6QMFP77',
     '2024-04-01',
-    '2024-04-25',
+    '2024-05-10',
     2
   ),
   (
     'Register for FYP Demo',
     'https://forms.gle/VMdtmeLAxH6QMFP77',
     '2024-04-01',
-    '2024-04-25',
+    '2024-05-10',
     3
   );
 -- Insert Dummy adminTasks
@@ -194,7 +194,7 @@ VALUES (
   ),
   (
     'Emergency Communications',
-    'uploads\covid.jpg',
+    'uploads\emergency.jpg',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla porttitor massa id neque aliquam vestibulum morbi.'
   );
 INSERT INTO payments (

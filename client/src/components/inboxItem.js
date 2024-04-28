@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchTasks } from "../api/tasks";
-import { add, formatDistance } from "date-fns";
+import { add, formatDistance, startOfDay } from "date-fns";
 
 const InboxItem = ({ user_id }) => {
   const [tasks, setTasks] = useState([]);
@@ -55,7 +55,7 @@ const InboxItem = ({ user_id }) => {
       {tasks.map((task) => {
         const relativeTime = formatDistance(
           new Date(task.task_createdat),
-          new Date(),
+          startOfDay(new Date()),
           { addSuffix: true }
         );
         const deadlineIsSoon = isDueWithinAWeek(task.task_deadline);

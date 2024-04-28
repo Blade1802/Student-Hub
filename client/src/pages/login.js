@@ -26,8 +26,8 @@ const Login = () => {
 
       localStorage.setItem("isAuth", "true");
     } catch (error) {
-      console.log(error);
-      setError(error);
+      console.log(error.response.data.errors[0].msg);
+      setError(error.response.data.errors[0].msg);
     }
   };
 
